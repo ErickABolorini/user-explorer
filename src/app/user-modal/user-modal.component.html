@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Detalhes do Usuário</h2> <!-- Título do modal -->
+
+<div mat-dialog-content> <!-- Conteúdo do modal -->
+  <p><strong>Nome:</strong> {{ user.name }}</p>
+  <p><strong>Email:</strong> {{ user.email }}</p>
+  <p><strong>Cidade:</strong> {{ user.address.city }}</p>
+  <p><strong>Empresa:</strong> {{ user.company.name }}</p>
+  <p><strong>Telefone:</strong> {{ user.phone }}</p>
+  <p><strong>Website:</strong> {{ user.website }}</p>
+  <p><strong>Nome de Usuário:</strong> {{ user.username }}</p>
+</div>
+
+<div mat-dialog-actions align="end"> <!-- Ações do modal, alinhadas à direita -->
+  <button mat-button mat-dialog-close class="custom-close-button">Fechar</button>
+</div>

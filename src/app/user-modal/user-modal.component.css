@@ -1,0 +1,10 @@
+.custom-close-button {
+  border-radius: 0;
+  background-color: transparent;
+  color: #333;
+  padding: 0;
+}
+
+.custom-close-button:hover {
+  background-color: #eee;
+}
