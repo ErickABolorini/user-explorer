@@ -15,6 +15,7 @@ export class UserListComponent implements OnInit {
   filteredUsers: User[] = [];
   searchText: string = '';
   errorMessage: string = '';
+  searchByAnyField: boolean = false;
 
   displayedColumns: string[] = ['name', 'email', 'city', 'company', 'actions'];
 
@@ -49,8 +50,53 @@ export class UserListComponent implements OnInit {
     // Aplica o filtro de pesquisa nos usuários com base no texto de pesquisa
     const filterValue = this.searchText.trim().toLowerCase();
     this.filteredUsers = this.users.filter((user) =>
-      user.name.toLowerCase().includes(filterValue)
+      this.searchByAnyField
+        ? this.filterBySpecificFields(user, filterValue)
+        : this.filterByAnyField(user, filterValue)
     );
   }
+
+  filterByAnyField(user: any, filterValue: string): boolean {
+    if (
+      user.hasOwnProperty('name') &&
+      typeof user['name'] === 'string' &&
+      user['name'].toLowerCase().includes(filterValue)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  filterBySpecificFields(user: any, filterValue: string): boolean {
+    const fieldsToFilter = ['name', 'email', 'address', 'company'];
+    for (const key of fieldsToFilter) {
+      if (
+        user.hasOwnProperty(key) &&
+        typeof user[key] === 'string' &&
+        user[key].toLowerCase().includes(filterValue)
+      ) {
+        return true;
+      } else if (
+        key === 'address' &&
+        user.hasOwnProperty('address') &&
+        user.address.hasOwnProperty('city') &&
+        typeof user.address.city === 'string' &&
+        user.address.city.toLowerCase().includes(filterValue)
+      ) {
+        return true;
+      } else if (
+        key === 'company' &&
+        user.hasOwnProperty('company') &&
+        user.company.hasOwnProperty('name') &&
+        typeof user.company.name === 'string' &&
+        user.company.name.toLowerCase().includes(filterValue)
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
 
 }

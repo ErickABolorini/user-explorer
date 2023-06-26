@@ -1,8 +1,11 @@
 <!-- Campo de busca -->
-<mat-form-field appearance="fill">
-  <mat-label>Procurar</mat-label>
-  <input matInput [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Digite o Nome">
-</mat-form-field>
+<div class="input-align">
+  <mat-form-field appearance="fill">
+    <mat-label>Procurar</mat-label>
+    <input matInput [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Digite o Valor">
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="searchByAnyField" style="margin-bottom: 16px;">Buscar por Todos os Campos</mat-checkbox>
+</div>
 
 <!-- Tabela de usuários -->
 <table mat-table [dataSource]="filteredUsers" class="mat-elevation-z8">
