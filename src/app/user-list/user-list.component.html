@@ -4,7 +4,8 @@
     <mat-label>Procurar</mat-label>
     <input matInput [(ngModel)]="searchText" (keyup)="applyFilter()" placeholder="Digite o Valor">
   </mat-form-field>
-  <mat-checkbox [(ngModel)]="searchByAnyField" style="margin-bottom: 16px;">Buscar por Todos os Campos</mat-checkbox>
+  <mat-checkbox [(ngModel)]="searchByAnyField">Buscar por Todos os Campos</mat-checkbox>
+  <mat-checkbox [(ngModel)]="usePagination">Incluir Paginação</mat-checkbox>
 </div>
 
 <!-- Tabela de usuários -->
@@ -50,6 +51,11 @@
   <!-- Linha de dados da tabela -->
   <tr mat-row *matRowDef="let user; columns: displayedColumns" (click)="openUserModal(user)"></tr>
 </table>
+
+<!-- Exibição do paginator -->
+<mat-paginator *ngIf="usePagination" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions" [length]="users.length"
+  showFirstLastButtons style="margin-top: 15px;">
+</mat-paginator>
 
 <!-- Exibição da mensagem de erro -->
 <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
